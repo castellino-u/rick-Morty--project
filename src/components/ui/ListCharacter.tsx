@@ -61,27 +61,31 @@ export const ListCharacter : React.FC<Props> = ({characterArray}) => {
     const arrayMapeado = mapFuncion(gender,specie)
 
     return (
-    <div className="h-[89vh]">
-        <div className="h-[] ">
-            <select name="" id="" onChange={handleChangeSpecie}>
+    <div className="h-[89vh] ">
+
+        <div className="flex justify-center gap-6 py-4">
+            
+            <select name="" id="" onChange={handleChangeSpecie} className="border w-[150px]  rounded-3xl  focus:outline-none focus:ring-2 focus:ring-blue-40 bg-white">
                 <option value="">Select a specie</option>
                 {
                     arraySpecie.map((specie)=>(
-                        <option value={specie}>{specie}</option>
+                    <option value={specie}>{specie}</option>
                     ))
                 }
             </select>
-            <select name="" id="" onChange={handleChangeGender} >
+
+            <select name="" id="" onChange={handleChangeGender} className="border w-[150px]   rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-40 bg-white ">
                 <option value="">Select a gender</option>
-                {
-                    arrayGender.map((gender)=>(
+                    {
+                        arrayGender.map((gender)=>(
                         <option value={gender}>{gender}</option>
-                    ))
-                }
+                        ))
+                    }
             </select>
+            
         </div>
 
-        <div className="m-auto flex flex-wrap justify-center  gap-10 mt-20 overflow-y-auto h-[74vh]  ">
+        <div className="m-auto flex flex-wrap justify-center  gap-10  overflow-y-auto h-[74vh] mt-4 ">
             {arrayMapeado.map((character)=>(
                 <CardCharacter character={character} key={character.id}></CardCharacter>
             ))}
