@@ -5,5 +5,6 @@ export interface Icharacter {
     name: string,
     status: string,
     species: string,
-    image: string
+    image: string,
+    gender: string
 }

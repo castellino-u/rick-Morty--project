@@ -23,7 +23,7 @@ export const MainScreent = () => {
     return (
     <div>
         <Header></Header>
-        <div className="bg-gradient-to-r from-green-400 to-cyan-400 h-[100%] w-full">
+        <div className="bg-gradient-to-r from-green-400 to-cyan-400 h-[100%] w-[100%]  flex flex-col m-auto">
             <ListCharacter characterArray={arrayCharacters} ></ListCharacter>
         </div>
     </div>

@@ -1,6 +1,7 @@
 
 //tengo que hacerlo FC a este para que funcione en diferentes contextos
 
+import { useState } from "react"
 import { Icharacter } from "../../types/Icharacter"
 import { CardCharacter } from "./CardCharacter"
 
@@ -12,20 +13,80 @@ interface Props {
 
 export const ListCharacter : React.FC<Props> = ({characterArray}) => {
 
-    
+    //filtrado: mapear sobre el array que tenes, agarrar el elemento que queres y luego 
+    //array para guardar las razas
+    const arraySpecie: string[] = []
+    const arrayGender: string[] = []
+
+    //estado para guardar el click del select
+    const [specie, setSpecie] = useState ("")
+    const [gender, setGender] = useState ("")
 
 
+    //le puedo poner como quiera, por ejemplo pepe
+    characterArray.map((pepe)=>{
+        //acá guardo las especies 
+        if(!arraySpecie.includes(pepe.species)){
+            arraySpecie.push(pepe.species)
+        }
+        if(!arrayGender.includes(pepe.gender)){
+            arrayGender.push(pepe.gender)
+        }
+    })
 
+    //ahora hay que agregar un handleChange para mostrar lo que yo clickee
+    const handleChangeSpecie  = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+        //el setSpecie recive el valor del selec que clickeamos, el evento
+        setSpecie(e.target.value)
+    }
 
+    //handleChange para Gender
+    const handleChangeGender = (e: React.ChangeEvent<HTMLSelectElement>) =>{
+        setGender(e.target.value)
+    }
+
+    //un filter retorna un array
+    //filtrado 
+
+    const mapFuncion = (selectGender : string , selectSpecie : string) =>{
+        return characterArray.filter((character)=>{
+            const matchGender = selectGender ? character.gender === selectGender : true
+            const matchSpecie = selectSpecie ? character.species == selectSpecie : true
+
+            return matchGender && matchSpecie
+
+        } )
+    }
+
+    const arrayMapeado = mapFuncion(gender,specie)
 
     return (
-    
-    <div>
-        {characterArray.map((character)=>(
-            <CardCharacter character={character} key={character.id}></CardCharacter>
-        ))}
-    </div>
+    <div className="h-[89vh]">
+        <div className="h-[] ">
+            <select name="" id="" onChange={handleChangeSpecie}>
+                <option value="">Select a specie</option>
+                {
+                    arraySpecie.map((specie)=>(
+                        <option value={specie}>{specie}</option>
+                    ))
+                }
+            </select>
+            <select name="" id="" onChange={handleChangeGender} >
+                <option value="">Select a gender</option>
+                {
+                    arrayGender.map((gender)=>(
+                        <option value={gender}>{gender}</option>
+                    ))
+                }
+            </select>
+        </div>
 
+        <div className="m-auto flex flex-wrap justify-center  gap-10 mt-20 overflow-y-auto h-[74vh]  ">
+            {arrayMapeado.map((character)=>(
+                <CardCharacter character={character} key={character.id}></CardCharacter>
+            ))}
+        </div>
+    </div>
 
     )
 }
