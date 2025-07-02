@@ -1,4 +1,5 @@
 import './App.css'
+import { AppRoutes } from './routes/AppRoutes'
 import { MainScreent } from './screens/MainScreent'
 
 function App() {
@@ -6,7 +7,7 @@ function App() {
 
   return (
     <div>
-      <MainScreent></MainScreent>
+      <AppRoutes></AppRoutes>
       
     </div>
   )

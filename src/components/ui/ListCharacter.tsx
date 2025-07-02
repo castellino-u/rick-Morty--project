@@ -68,8 +68,8 @@ export const ListCharacter : React.FC<Props> = ({characterArray}) => {
             <select name="" id="" onChange={handleChangeSpecie} className="border w-[150px]  rounded-3xl  focus:outline-none focus:ring-2 focus:ring-blue-40 bg-white">
                 <option value="">Select a specie</option>
                 {
-                    arraySpecie.map((specie)=>(
-                    <option value={specie}>{specie}</option>
+                    arraySpecie.map((specie, index)=>(
+                    <option value={specie} key={index} >{specie} </option>
                     ))
                 }
             </select>
@@ -77,8 +77,8 @@ export const ListCharacter : React.FC<Props> = ({characterArray}) => {
             <select name="" id="" onChange={handleChangeGender} className="border w-[150px]   rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-40 bg-white ">
                 <option value="">Select a gender</option>
                     {
-                        arrayGender.map((gender)=>(
-                        <option value={gender}>{gender}</option>
+                        arrayGender.map((gender, index)=>(
+                        <option value={gender} key={index} >{gender}</option>
                         ))
                     }
             </select>
