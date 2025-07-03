@@ -20,14 +20,16 @@ export const MainScreen = () => {
     //estado para el paginado
     const {page} = useStorePagination()
 
-    //resolvedora
+    //resolvedora que me resuelve el fetch
     const getCharacters = async ()=>{
-        setLoading(true)
+        setLoading(true) //esto pone en true el loading para poder mostrar ese componente
         const response = await getAllCharacters(page)
         setArrayCharacters(response)
-        setLoading(false)    
+        setLoading(false)     //esto pone en false el loading para poder ocultar ese componente ese componente
     }
 
+
+    //traemos a todos los personajes para mostrarlos apenas se lanza la app
     useEffect(()=>{
         getCharacters()
     },

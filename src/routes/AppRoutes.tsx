@@ -9,16 +9,15 @@ export const AppRoutes = () => {
 
 
     return (
-
-
-
-    
+        
+        
+        <>
+        {/* definimos la ruta para las pantallas */}
         <Routes>
             <Route path="/" element ={<MainScreen/>}/>
             <Route path="/DetailScreen/:idParam" element ={<DetailScreen/>}/>
         </Routes>
-    
-
+        </>
 
     )
 }

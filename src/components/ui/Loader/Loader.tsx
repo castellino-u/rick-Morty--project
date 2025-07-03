@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+// componente Loader 
 export const Loader = () => {
     return (
     

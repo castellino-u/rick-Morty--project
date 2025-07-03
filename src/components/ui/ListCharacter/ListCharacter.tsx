@@ -4,26 +4,33 @@ import { useStorePagination } from "../../../Store/useStorePagination"
 import { CardCharacter } from "../CardCharacter/CardCharacter"
 
 
+// componente para listar a los personajes y renderizarlos dependiendo de los filtros seleccionados
+
+
 interface Props {
   charactersArray: Icharacter[]
 }
 
 export const ListCharacters: FC<Props> = ({ charactersArray }) => {
-  const [selectedSpecie, setSelectedSpecie] = useState('')
-  const [selectedGender, setSelectedGender] = useState('')
-  const [species, setSpecies] = useState<string[]>([])
-  const [genders, setGenders] = useState<string[]>([])
-  const [filteredCharacters, setFilteredCharacters] = useState<Icharacter[]>([])
+  //Definimos los estados 
+  const [selectedSpecie, setSelectedSpecie] = useState('')  //estado para el select de Species(especies)
+  const [selectedGender, setSelectedGender] = useState('')  //estado para el select de Gender(generos)
+  const [species, setSpecies] = useState<string[]>([])   //estados para especies
+  const [genders, setGenders] = useState<string[]>([])   //estados para géneros
+  const [filteredCharacters, setFilteredCharacters] = useState<Icharacter[]>([])  //estado para mostrar a los personajes filtrados, ya sea por género o raza
 
-  const { page } = useStorePagination()
+  const { page } = useStorePagination()  //traemos de la Store, el número de página
 
 
 
   useEffect(() => {
+
+    //array de especies y generos para listarlas en el select
     const uniqueSpecies: string[] = []
     const uniqueGenders: string[] = []
 
     charactersArray.forEach(character => {
+      //si el array de especies no incluye la especie del personaje, la agregamos, si la incluye no hacemos nada  
       if (!uniqueSpecies.includes(character.species)) {
         uniqueSpecies.push(character.species)
       }
@@ -32,20 +39,26 @@ export const ListCharacters: FC<Props> = ({ charactersArray }) => {
       }
     })
 
+    //seteamos las species y genders
     setSpecies(uniqueSpecies)
     setGenders(uniqueGenders)
-  }, [charactersArray])
 
+    }, [charactersArray])
+  
+  //useEffect para filtrar por personaje y género seleccionado
   useEffect(() => {
+    //recorre todos los personajes y los filtra, me devuelve solo los que coinciden con la especie y e l genero seleccionado
     const result = charactersArray.filter(character => {
-      const matchesGender = selectedGender ? character.gender === selectedGender : true
-      const matchesSpecie = selectedSpecie ? character.species === selectedSpecie : true
+      const matchesGender = selectedGender ? character.gender === selectedGender : true  //si selectedGender tiene un valor, comprueba si el personaje tiene ese mismo género, si es null, me da true para no descargar ningún personaje y agregarlo al array
+      const matchesSpecie = selectedSpecie ? character.species === selectedSpecie : true ////si selectedGender tiene un valor, comprueba si el personaje tiene ese misma especie, si es null, me da true para no descargar ningún personaje y agregarlo al array
       return matchesGender && matchesSpecie
     })
+    //setea los personajes que cumplieron con las condiciones, para mostrarlos después
     setFilteredCharacters(result)
   }, [selectedGender, selectedSpecie, charactersArray])
 
 
+  //useEffect para resetear los filtros cada vez que se cambia de página y hay otros personajes, o  por si ese género o especie desaparecen 
   useEffect(() => {
     if (!species.includes(selectedSpecie)) {
       setSelectedSpecie('')
@@ -56,6 +69,7 @@ export const ListCharacters: FC<Props> = ({ charactersArray }) => {
   }, [page, species, genders])
 
   return (
+    // componente para mostrar los filtros
     <div >
       <div className="w-8/10 m-auto flex justify-between mt-5 max-w-[450px]">
         <select className="bg-white p-2 rounded-xl w-[200px]" onChange={(e) => setSelectedSpecie(e.target.value)} value={selectedSpecie}>

@@ -5,10 +5,10 @@ import { IcharacterIndividual } from "../types/ICharacterIndividual"
 
 //api
 const BASE_URL = 'https://rickandmortyapi.com/api/character'
-//paginado
+//paginado que ya trae la API   
 // https://rickandmortyapi.com/api/character/?page=19
 
-//get characters
+//get characters by page
 
 export const getAllCharacters = async (numberPage : number): Promise<Icharacter[]>=>{
 

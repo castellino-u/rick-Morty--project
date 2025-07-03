@@ -15,21 +15,15 @@ import { persist } from 'zustand/middleware'
 //   inc: () => set((state) => ({ count: state.count + 1 })),
 // }))
 
-// function Counter() {
-//   const { count, inc } = useStore()
-//   return (
-//     <div>
-//       <span>{count}</span>
-//       <button onClick={inc}>one up</button>
-//     </div>
-//   )
-// }
+
 
 type Store = {
     page : number,
     dec: (n: number) => void,
     inc: (n: number)=> void
 }
+
+// usamos el persist para que los datos persistan y pueda mantenerse en la misma página aún cuando recargamos
 
 export const useStorePagination = create<Store>()(
     persist((set) => ({
