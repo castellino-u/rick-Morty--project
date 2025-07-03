@@ -1,6 +1,5 @@
 import './App.css'
 import { AppRoutes } from './routes/AppRoutes'
-import { MainScreent } from './screens/MainScreent'
 
 function App() {
 

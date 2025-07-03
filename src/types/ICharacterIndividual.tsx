@@ -13,6 +13,6 @@ export interface IcharacterIndividual {
         url: string
     },
     image: string,
-    episode : string[]
+    episode : string[],
 
 }

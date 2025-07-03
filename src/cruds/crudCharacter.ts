@@ -5,14 +5,16 @@ import { IcharacterIndividual } from "../types/ICharacterIndividual"
 
 //api
 const BASE_URL = 'https://rickandmortyapi.com/api/character'
+//paginado
+// https://rickandmortyapi.com/api/character/?page=19
 
 //get characters
 
-export const getAllCharacters = async (): Promise<Icharacter[]>=>{
+export const getAllCharacters = async (numberPage : number): Promise<Icharacter[]>=>{
 
     try {
         
-        const response = await axios.get(BASE_URL)
+        const response = await axios.get(`${BASE_URL}/?page=${numberPage}`)
         return response.data.results
         
     } catch (error) {

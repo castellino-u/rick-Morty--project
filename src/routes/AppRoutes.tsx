@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import { MainScreent } from "../screens/MainScreent"
-import { DetailScreen } from "../components/ui/DetailScreen"
+import { MainScreen } from "../screens/MainScreen"
+import { DetailScreen } from "../components/ui/DetailScreen/DetailScreen"
 
 
 
@@ -14,7 +14,7 @@ export const AppRoutes = () => {
 
     
         <Routes>
-            <Route path="/" element ={<MainScreent/>}/>
+            <Route path="/" element ={<MainScreen/>}/>
             <Route path="/DetailScreen/:idParam" element ={<DetailScreen/>}/>
         </Routes>
     
